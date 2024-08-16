@@ -1,20 +1,21 @@
 // import img from '../../assets/others/authentication.png'
 import "./Login.css";
 import loginImage from "../../assets/others/authentication2.png";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 const Login = () => {
   // for recaptcha--------------
   const [disabled, setDisabled] = useState(true);
-  const captchaRef = useRef(null);
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
@@ -24,6 +25,8 @@ const Login = () => {
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+  // for redirect home page
+  const navigate = useNavigate();
   //   ----------------------
   // for login with fireBase---------
   const { signIn } = useContext(AuthContext);
@@ -36,11 +39,24 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "You are successfully login",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     });
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
   // --------------------------------
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss |login</title>
+      </Helmet>
       <div className="hero min-h-screen bgImage">
         <div className="hero-content flex flex-col md:flex-row">
           <div className="text-center md:w-1/2 lg:text-left">
@@ -88,18 +104,12 @@ const Login = () => {
                 </label>
                 <input
                   type="text"
-                  ref={captchaRef}
                   name="captcha"
+                  onBlur={handleValidateCaptcha}
                   placeholder="Type the text above"
                   className="input input-bordered"
                   required
                 />
-                <button
-                  onClick={handleValidateCaptcha}
-                  className="btn btn-outline btn-accent btn-xs mt-2"
-                >
-                  Validate
-                </button>
               </div>
               {/* ---------------------- */}
               <div className="form-control mt-6">
