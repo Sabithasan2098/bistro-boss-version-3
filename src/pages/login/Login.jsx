@@ -8,10 +8,16 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+
 const Login = () => {
+  // for private page-------------------
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
   // for recaptcha--------------
   const [disabled, setDisabled] = useState(true);
   const handleValidateCaptcha = (e) => {
@@ -26,7 +32,6 @@ const Login = () => {
     loadCaptchaEnginge(6);
   }, []);
   // for redirect home page
-  const navigate = useNavigate();
   //   ----------------------
   // for login with fireBase---------
   const { signIn } = useContext(AuthContext);
@@ -48,7 +53,7 @@ const Login = () => {
       });
     });
     setTimeout(() => {
-      navigate("/");
+      navigate(from, { replace: true });
     }, 2000);
   };
   // --------------------------------

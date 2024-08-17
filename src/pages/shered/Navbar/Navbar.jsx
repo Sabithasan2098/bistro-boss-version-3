@@ -43,6 +43,15 @@ const Navbar = () => {
           Contact Us
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/secret"
+          activeClassName="bg-yellow-400 text-black"
+          className="hover:bg-yellow-400 hover:text-black"
+        >
+          Secret
+        </NavLink>
+      </li>
 
       {user ? (
         <>
