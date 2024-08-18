@@ -113,7 +113,15 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 text-white">{navOptions}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user?.photoURL ? (
+          <img
+            src={user.photoURL}
+            alt="User Profile"
+            className="w-10 h-10 rounded-full border-2 border-yellow-400"
+          />
+        ) : (
+          <p className="text-yellow-400">No Profile Picture</p>
+        )}
       </div>
     </div>
   );
