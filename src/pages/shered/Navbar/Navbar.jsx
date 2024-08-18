@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { FaCartShopping } from "react-icons/fa6";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
   const navOptions = (
-    <>
+    <p className="flex items-center">
       <li>
         <NavLink to="/" activeClassName="bg-yellow-400 text-black" className="">
           Home
@@ -77,7 +78,15 @@ const Navbar = () => {
           </li>{" "}
         </>
       )}
-    </>
+      <li>
+        <NavLink to="/">
+          <button className="btn">
+            <FaCartShopping />
+            <div className="badge badge-secondary">+0</div>
+          </button>
+        </NavLink>
+      </li>
+    </p>
   );
 
   return (
