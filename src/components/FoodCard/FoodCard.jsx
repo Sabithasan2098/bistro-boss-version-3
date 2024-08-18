@@ -1,10 +1,11 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import Button from "../../pages/shered/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FoodCard = ({ item }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
   const handleAddToCart = (food) => {
     console.log(food);
@@ -18,10 +19,10 @@ const FoodCard = ({ item }) => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Login",
+        confirmButtonText: "Yes,Login",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login");
+          navigate("/login", { state: { from: location } });
         }
       });
     }

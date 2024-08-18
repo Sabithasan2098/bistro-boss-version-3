@@ -11,7 +11,7 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
   const navOptions = (
-    <p className="flex items-center">
+    <>
       <li>
         <NavLink to="/" activeClassName="bg-yellow-400 text-black" className="">
           Home
@@ -86,7 +86,7 @@ const Navbar = () => {
           </button>
         </NavLink>
       </li>
-    </p>
+    </>
   );
 
   return (
@@ -111,7 +111,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow "
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-black "
           >
             {navOptions}
           </ul>
@@ -119,7 +119,9 @@ const Navbar = () => {
         <a className="btn btn-ghost text-xl">Bistro Boss</a>
       </div>
       <div className="navbar-center hidden lg:flex ">
-        <ul className="menu menu-horizontal px-1 text-white">{navOptions}</ul>
+        <ul className="menu menu-horizontal px-1 text-white items-center ">
+          {navOptions}
+        </ul>
       </div>
       <div className="navbar-end">
         {user?.photoURL ? (

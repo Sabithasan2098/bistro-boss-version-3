@@ -17,7 +17,11 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // when login navigate where you came from-------
   const from = location.state?.from?.pathname || "/";
+  console.log("state to the location", location.state);
+  // ----------------------------------------------
+
   // for recaptcha--------------
   const [disabled, setDisabled] = useState(true);
   const handleValidateCaptcha = (e) => {
@@ -120,6 +124,7 @@ const Login = () => {
               <div className="form-control mt-6">
                 <input
                   type="submit"
+                  // TODO disabled
                   disabled={disabled}
                   className="btn btn-primary"
                   value="Login"
