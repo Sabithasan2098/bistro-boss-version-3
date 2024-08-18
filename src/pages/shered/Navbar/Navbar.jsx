@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import useCart from "../../../hooks/useCart";
+import { IoPerson } from "react-icons/io5";
 
 const Navbar = () => {
   const [cart] = useCart();
@@ -60,8 +61,8 @@ const Navbar = () => {
         <>
           <button
             onClick={handleLogOut}
-            className="hover:bg-yellow-400 hover:text-black
-             active:bg-yellow-400 active:text-black rounded-lg px-4"
+            className="hover:bg-red-600 hover:text-black
+             active:bg-red-600 active:text-black rounded-lg px-4 py-2"
           >
             Log Out
           </button>
@@ -133,7 +134,7 @@ const Navbar = () => {
             className="w-10 h-10 rounded-full border-2 border-yellow-400"
           />
         ) : (
-          <p className="text-yellow-400">No Profile Picture</p>
+          <IoPerson />
         )}
       </div>
     </div>

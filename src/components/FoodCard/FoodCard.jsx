@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import Button from "../../pages/shered/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
+import useCart from "../../hooks/useCart";
 
 const FoodCard = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
@@ -10,8 +11,9 @@ const FoodCard = ({ item }) => {
   const location = useLocation();
   const axiosSecure = useAxios();
   const { user } = useAuth();
-  const handleAddToCart = (food) => {
-    console.log(food);
+  const [, refetch] = useCart();
+
+  const handleAddToCart = () => {
     if (user && user?.email) {
       const cartItem = {
         menuId: _id,
@@ -29,6 +31,8 @@ const FoodCard = ({ item }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          // for always update the cart
+          refetch();
         }
       });
     } else {
@@ -59,11 +63,7 @@ const FoodCard = ({ item }) => {
         <h2 className="card-title">{name}</h2>
         <p>{recipe}</p>
         <div className="card-actions justify-center">
-          <button
-            onClick={() => {
-              handleAddToCart(item);
-            }}
-          >
+          <button onClick={handleAddToCart}>
             {" "}
             <Button
               Button={"Add to cart"}
