@@ -82,7 +82,7 @@ const Navbar = () => {
         </>
       )}
       <li>
-        <NavLink to="/">
+        <NavLink to={"/dashboard/cart"}>
           <button className="btn">
             <FaCartShopping />
             <div className="badge badge-secondary">+{cart?.length}</div>
