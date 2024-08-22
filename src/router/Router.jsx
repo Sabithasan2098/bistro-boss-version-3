@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import Secret from "../pages/shered/Secret/Secret";
 import Dashboard from "../layout/Dashboard";
 import Cart from "../pages/dashBoard/Cart/Cart";
+import AllUsers from "../pages/dashBoard/AllUsers/AllUsers";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers />,
       },
     ],
   },
