@@ -11,6 +11,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
   // for private page-------------------
@@ -137,6 +138,8 @@ const Login = () => {
                 register
               </Link>
             </p>
+            <div className="divider mx-8"></div>
+            <SocialLogin />
           </div>
         </div>
       </div>
