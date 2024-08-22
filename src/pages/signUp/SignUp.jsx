@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
@@ -29,7 +30,6 @@ const SignUp = () => {
           const userData = {
             name: data.name,
             email: data.email,
-            image: data.photoURL,
           };
           axiosPublic.post("/users", userData).then((res) => {
             if (res.data.insertedId) {
@@ -152,6 +152,8 @@ const SignUp = () => {
                 Login
               </Link>
             </p>
+            <div className="divider mx-8"></div>
+            <SocialLogin />
           </div>
         </div>
       </div>
