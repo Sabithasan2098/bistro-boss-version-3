@@ -3,10 +3,11 @@ import useAxios from "../../../hooks/useAxios";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { MdDelete } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxios();
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/allUsers");
@@ -14,12 +15,54 @@ const AllUsers = () => {
     },
   });
   //   delete a user----------
-  const handleDeleteUser = (user) => {
-    console.log(user);
+  const handleDeleteUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/allUsers/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
   };
   //   create admin------------
-  const handleCreateAdmin = (user) => {
-    console.log(user);
+  const handleCreateAdmin = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Create it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/allUsers/admin/${id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Created admin!",
+              text: "You are successful to create admin.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
   };
   return (
     <div>
@@ -34,7 +77,7 @@ const AllUsers = () => {
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Roll</th>
+                <th>Role</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -53,16 +96,20 @@ const AllUsers = () => {
                     <h3>{user.email}</h3>
                   </td>
                   <td>
-                    <button
-                      onClick={() => handleCreateAdmin(user)}
-                      className="btn btn-ghost bg-[#d1a054] px-4 py-2 text-2xl text-white"
-                    >
-                      <FaUsers className="" />
-                    </button>
+                    {user.role === "admin" ? (
+                      "Admin"
+                    ) : (
+                      <button
+                        onClick={() => handleCreateAdmin(user._id)}
+                        className="btn btn-ghost bg-[#d1a054] px-4 py-2 text-2xl text-white"
+                      >
+                        <FaUsers />
+                      </button>
+                    )}
                   </td>
                   <th>
                     <button
-                      onClick={() => handleDeleteUser(user)}
+                      onClick={() => handleDeleteUser(user._id)}
                       className="btn btn-ghost bg-red-600 px-4 py-2 text-2xl text-white"
                     >
                       <MdDelete />
