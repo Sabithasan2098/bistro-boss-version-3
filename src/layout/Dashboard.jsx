@@ -8,9 +8,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa6";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-orange-400">
