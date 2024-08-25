@@ -11,6 +11,8 @@ import Secret from "../pages/shered/Secret/Secret";
 import Dashboard from "../layout/Dashboard";
 import Cart from "../pages/dashBoard/Cart/Cart";
 import AllUsers from "../pages/dashBoard/AllUsers/AllUsers";
+import AddItems from "../pages/dashBoard/AddItems/AddItems";
+import AdminRoute from "./AdminRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -58,13 +60,27 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // normal user route
       {
         path: "cart",
         element: <Cart />,
       },
+      // admin route
       {
         path: "allUsers",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addItems",
+        element: (
+          <AdminRoute>
+            <AddItems />
+          </AdminRoute>
+        ),
       },
     ],
   },
