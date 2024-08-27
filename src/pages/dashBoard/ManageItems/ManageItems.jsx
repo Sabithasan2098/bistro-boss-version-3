@@ -4,14 +4,12 @@ import useMenu from "../../../hooks/useMenu";
 import { FiEdit } from "react-icons/fi";
 import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [data, , refetch] = useMenu([]);
   const axiosSecure = useAxios();
 
-  const handleUpdate = (id) => {
-    console.log(id);
-  };
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -71,16 +69,12 @@ const ManageItems = () => {
                     <p>{item.price}</p>
                   </td>
                   <td>
-                    {item.role === "admin" ? (
-                      "Admin"
-                    ) : (
-                      <button
-                        onClick={() => handleUpdate(item._id)}
-                        className="btn btn-ghost bg-[#d1a054] px-4 py-2  text-lg text-white"
-                      >
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      {" "}
+                      <button className="btn btn-ghost bg-[#d1a054] px-4 py-2  text-lg text-white">
                         <FiEdit />
                       </button>
-                    )}
+                    </Link>
                   </td>
                   <th>
                     <button

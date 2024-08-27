@@ -4,12 +4,12 @@ import useMenu from "../../../hooks/useMenu";
 const PopularMenu = () => {
   const [menu] = useMenu();
 
-  const popularMenu = menu.filter((data) => data.category === "popular");
+  const popularMenu = menu?.filter((data) => data.category === "popular");
   return (
     <div className="mb-8 md:mb-20 ">
       <SectionTitle heading="from our menu" subHeading="Check it out" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
-        {popularMenu.map((data) => (
+        {popularMenu?.map((data) => (
           <section key={data._id}>
             <div className="flex space-x-2 items-center">
               <img
