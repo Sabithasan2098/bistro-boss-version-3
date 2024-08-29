@@ -3,6 +3,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCart from "../../../hooks/useCart";
 import { MdDelete } from "react-icons/md";
 import useAxios from "../../../hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -40,7 +41,15 @@ const Cart = () => {
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold">Total Orders:{cart?.length}</h2>
           <h2 className="text-2xl font-bold">Total Price:${totalPrice}</h2>
-          <button className="btn btn-warning">Pay</button>
+          {cart.length ? (
+            <Link to={"/dashboard/payment"}>
+              <button className="btn btn-warning">Pay</button>
+            </Link>
+          ) : (
+            <button disabled className="btn btn-warning">
+              Pay
+            </button>
+          )}
         </div>
         <div className="overflow-x-auto">
           <table className="table mt-5">
