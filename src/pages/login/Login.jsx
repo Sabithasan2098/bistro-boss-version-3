@@ -56,10 +56,10 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      setTimeout(() => {
+        navigate(from, { replace: true });
+      }, 2000);
     });
-    setTimeout(() => {
-      navigate(from, { replace: true });
-    }, 2000);
   };
   // --------------------------------
   return (
