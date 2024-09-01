@@ -67,6 +67,19 @@ const CheckoutForm = () => {
       if (paymentIntent.status === "succeeded") {
         console.log("TranjectionId", paymentIntent.id);
         setTranjection(paymentIntent.id);
+
+        // save payment history in database-------
+        const payment = {
+          price: price,
+          email: user.email,
+          transectionId: paymentIntent.id,
+          date: new Date(),
+          cartIds: cart.map((item) => item._id),
+          menuItemIds: cart.map((item) => item.menuId),
+          status: "pending",
+        };
+        const res = await axiosSecure.post("/payment", payment);
+        console.log(res.data);
       }
     }
   };
