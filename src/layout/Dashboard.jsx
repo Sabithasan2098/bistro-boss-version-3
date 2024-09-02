@@ -9,9 +9,11 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa6";
 import useAdmin from "../hooks/useAdmin";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
+  const [cart] = useCart();
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-orange-400">
@@ -66,7 +68,7 @@ const Dashboard = () => {
               <li className="flex gap-2">
                 <NavLink to={"/dashboard/cart"}>
                   <FaCartShopping />
-                  My Cart
+                  My Cart <span className="text-red-800">({cart?.length})</span>
                 </NavLink>
               </li>
               <li className="flex gap-2">

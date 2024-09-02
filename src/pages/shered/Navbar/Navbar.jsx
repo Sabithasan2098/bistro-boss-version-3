@@ -86,13 +86,13 @@ const Navbar = () => {
       <>
         {isAdmin ? (
           <li>
-            <NavLink to={"/dashboard/allUsers"}>
+            <NavLink to={"/dashboard/adminHome"}>
               <button className="btn">Admin panel </button>
             </NavLink>
           </li>
         ) : (
           <li>
-            <NavLink to={"/dashboard/cart"}>
+            <NavLink to={"/dashboard/userHome"}>
               <button className="btn">
                 <FaCartShopping />
                 <div className="badge badge-secondary">+{cart?.length}</div>
